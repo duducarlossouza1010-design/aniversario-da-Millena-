@@ -10,6 +10,7 @@
             font-family: Arial, sans-serif;
             padding: 40px 20px;
             color: #333;
+            overflow: hidden;
         }
         .container {
             background: white;
@@ -17,11 +18,23 @@
             margin: auto;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            animation: aparecer 2s ease-in;
+            position: relative;
+            z-index: 10;
+        }
+        @keyframes aparecer {
+            from {opacity: 0; transform: scale(0.8);}
+            to {opacity: 1; transform: scale(1);}
         }
         h1 {
             color: #e91e63;
             font-size: 32px;
+            animation: pulsar 1.5s infinite;
+        }
+        @keyframes pulsar {
+            0%, 100% {transform: scale(1);}
+            50% {transform: scale(1.05);}
         }
         p {
             font-size: 18px;
@@ -33,6 +46,21 @@
             font-weight: bold;
             margin-top: 20px;
             color: #e91e63;
+        }
+        .coracao {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            color: #e91e63;
+            animation: cair 5s linear infinite;
+            z-index: 1;
+        }
+        @keyframes cair {
+            to {transform: translateY(100vh);}
+        }
+        iframe {
+            opacity: 0.01;
+            position: absolute;
         }
     </style>
 </head>
@@ -56,5 +84,22 @@
         
         <p class="assinatura">Com todo o meu amor, Dudu ❤️</p>
     </div>
+
+    <!-- MÚSICA META É FICAR BEM - AUTO PLAY -->
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/7n9fXxVq3hE?autoplay=1&loop=1&playlist=7n9fXxVq3hE" frameborder="0" allow="autoplay"></iframe>
+
+    <!-- CORAÇÕES CAINDO -->
+    <script>
+        function criarCoracao() {
+            const coracao = document.createElement('div');
+            coracao.classList.add('coracao');
+            coracao.innerHTML = '❤️';
+            coracao.style.left = Math.random() * 100 + 'vw';
+            coracao.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(coracao);
+            setTimeout(() => coracao.remove(), 5000);
+        }
+        setInterval(criarCoracao, 300);
+    </script>
 </body>
 </html>
